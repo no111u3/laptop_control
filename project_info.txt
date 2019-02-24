@@ -1,0 +1,48 @@
+project
+=======
+
+name
+    laptop_control
+
+backend
+=======
+
+sensors
+    temperature
+    cpu controls
+    perepheral controls
+    software update status
+    other hw and sw metrics
+services
+    laptop_control_d
+    software_updater_d
+
+
+frontend
+========
+
+applications
+    laptop_control
+    software_updater
+plasmoids
+    laptop_control_p
+    software_updater_p
+
+stack
+=====
+
+C++17(C++20 on future)
+STL (prefer to Boost implementation, with filesystem)
+Json (jsoncpp)
+Boost (asio, programm, other utilities)
+Qt5/QML/QtScript - plasmoid frontend stack
+Yaml (yaml-cpp)
+
+behavior models
+===============
+
+activities
+    sensors analytics
+    software status and updates
+    control power consumer
+    telemetry
