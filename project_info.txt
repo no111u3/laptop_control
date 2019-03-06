@@ -10,7 +10,7 @@ backend
 sensors
     temperature
     cpu controls
-    perepheral controls
+    peripheral controls
     software update status
     other hw and sw metrics
 services
