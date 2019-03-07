@@ -12,15 +12,10 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 
-cmake_minimum_required(VERSION 3.9.6 FATAL_ERROR)
+set(SOFTWARE_U_SOURCES
+        src/main.cc
+        )
 
-project(laptop_control VERSION 0.0.0 LANGUAGES CXX)
+add_executable(software_updater ${SOFTWARE_U_SOURCES})
 
-# setup C++17 required compiler
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED on)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-# programms
-add_subdirectory(laptop_control)
-add_subdirectory(software_updater)
+target_include_directories(software_updater PRIVATE include)
