@@ -19,5 +19,6 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 namespace {
 }
 
-auto main() -> int {
+auto main(int argc, char **argv) -> int {
+    fmt::print("{} simple program to control laptop power management and other\n", argv[0]);
 }

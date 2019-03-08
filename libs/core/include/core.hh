@@ -13,10 +13,8 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 #pragma once
 
-#include <fmt/format.h>
+namespace core {
 
-namespace laptop_control {
-} // namespace laptop_control
+} // namespace core

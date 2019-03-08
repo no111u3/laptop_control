@@ -12,13 +12,13 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 
-set(SOFTWARE_U_SOURCES
-        src/main.cc
+set(CORE_SOURCES
+        src/core.cc
         )
 
-add_executable(software_updater ${SOFTWARE_U_SOURCES})
+add_library(core ${CORE_SOURCES})
 
-target_link_libraries(software_updater
-        core)
+find_package(fmt)
+target_link_libraries(core fmt::fmt)
 
-target_include_directories(software_updater PRIVATE include)
+target_include_directories(core PUBLIC include)

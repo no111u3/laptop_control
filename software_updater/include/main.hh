@@ -16,5 +16,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 
 #pragma once
 
+#include <fmt/format.h>
+
 namespace software_updater {
 } // namespace software_updater

@@ -24,3 +24,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # programms
 add_subdirectory(laptop_control)
 add_subdirectory(software_updater)
+
+#libs
+add_subdirectory(libs)

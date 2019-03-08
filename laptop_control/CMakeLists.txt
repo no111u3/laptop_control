@@ -18,4 +18,7 @@ set(LAPTOP_C_SOURCES
 
 add_executable(laptop_control ${LAPTOP_C_SOURCES})
 
+target_link_libraries(laptop_control
+        core)
+
 target_include_directories(laptop_control PRIVATE include)

@@ -12,13 +12,7 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 
-set(SOFTWARE_U_SOURCES
-        src/main.cc
-        )
+cmake_minimum_required(VERSION 3.9.6 FATAL_ERROR)
 
-add_executable(software_updater ${SOFTWARE_U_SOURCES})
-
-target_link_libraries(software_updater
-        core)
-
-target_include_directories(software_updater PRIVATE include)
+# libraries
+add_subdirectory(core)
