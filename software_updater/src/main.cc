@@ -23,6 +23,6 @@ namespace {
 
 auto main(int argc, char **argv, char **env) -> int {
     core::Env::create(argc, argv, env);
-
-    fmt::print("{} simple program to update software for Gentoo based linux\n", argv[0]);
+    core::Env::get().setProgrammInto("simple program to update software for Gentoo based linux");
+    core::Env::get().process();
 }
