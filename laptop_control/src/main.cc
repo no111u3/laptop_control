@@ -16,9 +16,13 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 
 #include "main.hh"
 
+#include <core.hh>
+
 namespace {
 }
 
-auto main(int argc, char **argv) -> int {
+auto main(int argc, char **argv, char **env) -> int {
+    core::Env::create(argc, argv, env);
+
     fmt::print("{} simple program to control laptop power management and other\n", argv[0]);
 }
