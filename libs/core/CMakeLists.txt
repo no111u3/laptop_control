@@ -19,6 +19,11 @@ set(CORE_SOURCES
 add_library(core ${CORE_SOURCES})
 
 find_package(fmt)
-target_link_libraries(core fmt::fmt)
+find_package(yaml-cpp)
+
+target_link_libraries(core
+        fmt::fmt
+        yaml-cpp
+        )
 
 target_include_directories(core PUBLIC include)
