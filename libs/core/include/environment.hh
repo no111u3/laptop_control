@@ -15,6 +15,11 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
+#include <popl.hpp>
+
+#include <string>
+#include <utility>
+
 namespace core {
     class Environment {
     public:
@@ -24,6 +29,28 @@ namespace core {
 
         Environment(int argc, char **argv, char **env);
 
+        template <typename T, typename ...Args>
+        decltype(auto) addCustomArgument(Args &&...args) {
+            return parser_.add<T>(std::forward<Args>(args)...);
+        }
+
+        void setProgrammInto(const std::string &intro) {
+            programIntro_ = intro;
+        }
+
+        void process();
     private:
+        struct ProgramArguments {
+            int argc;
+            char **argv;
+            char **env;
+        };
+
+        void parseArguments(int argc, char **argv);
+        void parseEnvironment(char **env);
+
+        ProgramArguments programArguments_{};
+        popl::OptionParser parser_{};
+        std::string programIntro_{};
     };
 } // namespace core

@@ -13,19 +13,33 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#include <environment.hh>
-
 #include "environment.hh"
 
 #include <fmt/format.h>
 
 namespace core {
+    Environment::Environment(int argc, char **argv, char **env) :
+        programArguments_{argc, argv, env},
+        parser_("Program options") {
+    }
 
-    Environment::Environment(int argc, char **argv, char **env) {
-        (void)argc;
-        (void)argv;
+    void Environment::process() {
+        auto &&[argc, argv, env] = programArguments_;
+        parseArguments(argc, argv);
+        parseEnvironment(env);
+
+        if (parser_.get_option<popl::Switch>("help")->count()) {
+            fmt::print("{} - {}\n\n{}", argv[0], programIntro_, parser_.help());
+        }
+    }
+
+    void Environment::parseArguments(int argc, char **argv) {
+        parser_.add<popl::Switch>("h", "help", "this programm help");
+
+        parser_.parse(argc, argv);
+    }
+
+    void Environment::parseEnvironment(char **env) {
         (void)env;
-
-        fmt::print("{} called with {} arguments\n", __FUNCTION__, argc);
     }
 } // namespace core
