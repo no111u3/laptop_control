@@ -13,11 +13,19 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#pragma once
+#include <environment.hh>
 
 #include "environment.hh"
-#include "singleton.hh"
+
+#include <fmt/format.h>
 
 namespace core {
-    using Env = Singleton<Environment>;
+
+    Environment::Environment(int argc, char **argv, char **env) {
+        (void)argc;
+        (void)argv;
+        (void)env;
+
+        fmt::print("{} called with {} arguments\n", __FUNCTION__, argc);
+    }
 } // namespace core

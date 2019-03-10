@@ -14,6 +14,8 @@
 
 set(CORE_SOURCES
         src/core.cc
+        src/environment.cc
+        src/singleton.cc
         )
 
 add_library(core ${CORE_SOURCES})

@@ -15,9 +15,15 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include "environment.hh"
-#include "singleton.hh"
-
 namespace core {
-    using Env = Singleton<Environment>;
+    class Environment {
+    public:
+        Environment() = default;
+        Environment(const Environment &) = default;
+        Environment(Environment &&) = default;
+
+        Environment(int argc, char **argv, char **env);
+
+    private:
+    };
 } // namespace core

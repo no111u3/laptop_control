@@ -15,9 +15,31 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include "environment.hh"
-#include "singleton.hh"
+#include <memory>
+#include <utility>
 
 namespace core {
-    using Env = Singleton<Environment>;
+    template <typename T>
+    class Singleton {
+    public:
+        static T & get() {
+            return *t_;
+        }
+
+        template <typename ...Args>
+        static void create(Args ...args) {
+            t_ = std::make_unique<T>(std::forward<Args>(args)...);
+        }
+
+    private:
+        Singleton() = default;
+        Singleton(const Singleton &) = default;
+        Singleton(Singleton &&) noexcept = default;
+        ~Singleton() = default;
+
+        static std::unique_ptr<T> t_;
+    };
+
+    template <typename T>
+    std::unique_ptr<T> Singleton<T>::t_ = {};
 } // namespace core
