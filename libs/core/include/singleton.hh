@@ -37,9 +37,6 @@ namespace core {
         Singleton(Singleton &&) noexcept = default;
         ~Singleton() = default;
 
-        static std::unique_ptr<T> t_;
+        static inline std::unique_ptr<T> t_;
     };
-
-    template <typename T>
-    std::unique_ptr<T> Singleton<T>::t_ = {};
 } // namespace core
