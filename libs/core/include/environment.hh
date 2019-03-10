@@ -30,15 +30,29 @@ namespace core {
         Environment(int argc, char **argv, char **env);
 
         template <typename T, typename ...Args>
-        decltype(auto) addCustomArgument(Args &&...args) {
-            return parser_.add<T>(std::forward<Args>(args)...);
+        decltype(auto) addCustomValue(Args &&...args) {
+            return parser_.add<popl::Value<T>>(std::forward<Args>(args)...);
+        }
+
+        template <typename T>
+        auto getValue(const std::string &name, T) {
+            if (auto variable = parser_.get_option<popl::Value<T>>(name); variable->is_set()) {
+                return variable->value();
+            }
+            else {
+                return variable->get_default();
+            }
         }
 
         void setProgrammInto(const std::string &intro) {
             programIntro_ = intro;
         }
 
-        void process();
+        const std::string configFile() const {
+            return configFile_;
+        }
+
+        bool process();
     private:
         struct ProgramArguments {
             int argc;
@@ -52,5 +66,6 @@ namespace core {
         ProgramArguments programArguments_{};
         popl::OptionParser parser_{};
         std::string programIntro_{};
+        std::string configFile_{};
     };
 } // namespace core

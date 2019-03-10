@@ -23,18 +23,26 @@ namespace core {
         parser_("Program options") {
     }
 
-    void Environment::process() {
+    bool Environment::process() {
         auto &&[argc, argv, env] = programArguments_;
         parseArguments(argc, argv);
         parseEnvironment(env);
 
         if (parser_.get_option<popl::Switch>("help")->count()) {
             fmt::print("{} - {}\n\n{}", argv[0], programIntro_, parser_.help());
+
+            return false;
+        }
+        else {
+            configFile_ = getValue("config", std::string{});
+
+            return true;
         }
     }
 
     void Environment::parseArguments(int argc, char **argv) {
         parser_.add<popl::Switch>("h", "help", "this programm help");
+        parser_.add<popl::Value<std::string>>("c", "config", "program config file", "config.yaml");
 
         parser_.parse(argc, argv);
     }
