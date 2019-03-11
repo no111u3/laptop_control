@@ -18,6 +18,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <popl.hpp>
 
 #include <string>
+#include <map>
 #include <utility>
 
 namespace core {
@@ -52,6 +53,18 @@ namespace core {
             return configFile_;
         }
 
+        const std::string getEnvVariable(const std::string &name) const {
+            auto it = env_.find(name);
+            if (it == env_.end()) {
+                return {};
+            }
+            return it->second;
+        }
+
+        const auto env() const {
+            return env_;
+        }
+
         bool process();
     private:
         struct ProgramArguments {
@@ -65,6 +78,7 @@ namespace core {
 
         ProgramArguments programArguments_{};
         popl::OptionParser parser_{};
+        std::map<std::string, std::string> env_;
         std::string programIntro_{};
         std::string configFile_{};
     };

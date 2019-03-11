@@ -17,6 +17,8 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 
 #include <fmt/format.h>
 
+#include <algorithm>
+
 namespace core {
     Environment::Environment(int argc, char **argv, char **env) :
         programArguments_{argc, argv, env},
@@ -48,6 +50,15 @@ namespace core {
     }
 
     void Environment::parseEnvironment(char **env) {
-        (void)env;
+        for (auto iter = env; *iter != nullptr; iter++) {
+            auto item = std::string(*iter);
+            auto endName = std::find(item.begin(), item.end(), '=');
+            if (endName != item.end()) {
+                env_[std::string{item.begin(), endName}] = std::string(endName + 1, item.end());
+            }
+            else {
+                env_[item] = "";
+            }
+        }
     }
 } // namespace core
