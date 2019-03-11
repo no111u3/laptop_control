@@ -15,13 +15,37 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include "config.hh"
-#include "environment.hh"
-#include "singleton.hh"
+#include <yaml-cpp/yaml.h>
 
-#include <fmt/format.h>
+#include <filesystem>
+#include <string>
+#include <utility>
 
 namespace core {
-    using Env = Singleton<Environment>;
-    using Conf = Singleton<Config>;
+    namespace fs = std::filesystem;
+
+    class Config {
+    public:
+        Config() = default;
+        Config(const Config &) = default;
+        Config(Config &&) = default;
+        ~Config() {
+            store();
+        }
+
+        explicit Config(std::string name) : name_{std::move(name)} {}
+
+        void process();
+
+        auto & conf() const {
+            return conf_;
+        }
+    private:
+        void store();
+
+        fs::path configPath();
+
+        const std::string name_;
+        YAML::Node conf_;
+    };
 } // namespace core

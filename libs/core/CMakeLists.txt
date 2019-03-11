@@ -13,6 +13,7 @@
 #limitations under the License.
 
 set(CORE_SOURCES
+        src/config.cc
         src/core.cc
         src/environment.cc
         src/singleton.cc
@@ -26,6 +27,7 @@ find_package(yaml-cpp)
 target_link_libraries(core
         fmt::fmt
         yaml-cpp
+        stdc++fs
         )
 
 target_include_directories(core PUBLIC include)
