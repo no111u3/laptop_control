@@ -15,15 +15,19 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include "module/holder.hh"
-#include "config.hh"
-#include "environment.hh"
-#include "singleton.hh"
-
-#include <fmt/format.h>
+#include <string>
+#include <utility>
 
 namespace core {
-    using Env = Singleton<Environment>;
-    using Conf = Singleton<Config>;
-    using Mod = Singleton<module::Holder>;
+    namespace module {
+        class IEntity {
+        public:
+            explicit IEntity(std::string name) : name_{std::move(name)} {}
+
+            virtual ~IEntity() = default;
+
+        private:
+            const std::string name_;
+        };
+    } // namespace module
 } // namespace core
