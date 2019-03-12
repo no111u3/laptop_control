@@ -30,6 +30,8 @@ namespace core {
 
             virtual ~IModule() = default;
 
+            virtual void init() = 0;
+
             std::shared_ptr<IEntity> entity(const std::string &name) {
                 return entities_.at(name);
             }

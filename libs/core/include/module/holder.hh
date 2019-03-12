@@ -43,6 +43,12 @@ namespace core {
                 return modules_.at(name);
             }
 
+            void process() {
+                for (const auto &module : modules_) {
+                    module.second->init();
+                }
+            }
+
         private:
             template <typename Holder>
             std::pair<std::string, std::shared_ptr<IModule>> create() {
