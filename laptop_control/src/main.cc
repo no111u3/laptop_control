@@ -17,6 +17,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include "main.hh"
 
 #include <core.hh>
+#include <cpu_thermal.hh>
 
 namespace {
 }
@@ -27,4 +28,6 @@ auto main(int argc, char **argv, char **env) -> int {
     core::Env::get().process();
     core::Conf::create("laptop_control");
     core::Conf::get().process();
+    core::Mod::create();
+    core::Mod::get().construct<cpu_thermal::Holder>();
 }
