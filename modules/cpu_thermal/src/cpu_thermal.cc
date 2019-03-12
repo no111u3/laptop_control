@@ -16,5 +16,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include "cpu_thermal.hh"
 
 namespace cpu_thermal {
+    void Module::init() {
 
+    }
 } // namespace cpu_thermal

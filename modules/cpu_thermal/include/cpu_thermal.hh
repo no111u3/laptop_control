@@ -23,8 +23,9 @@ namespace cpu_thermal {
     class Module : public core::module::IModule {
     public:
         Module() : IModule("cpu_thermal") {}
-
         ~Module() override = default;
+
+        void init() override;
     };
 
     class Holder : public core::module::IHolder {
@@ -32,7 +33,7 @@ namespace cpu_thermal {
         Holder() : IHolder() {}
 
         std::shared_ptr<core::module::IModule> module() override {
-            return std::make_shared<core::module::IModule>(Module{});
+            return std::make_shared<Module>();
         }
     };
 } // namespace cpu_thermal
