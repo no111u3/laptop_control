@@ -30,4 +30,5 @@ auto main(int argc, char **argv, char **env) -> int {
     core::Conf::get().process();
     core::Mod::create();
     core::Mod::get().construct<cpu_thermal::Holder>();
+    core::Mod::get().process();
 }
