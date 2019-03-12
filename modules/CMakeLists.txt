@@ -14,19 +14,5 @@
 
 cmake_minimum_required(VERSION 3.9.6 FATAL_ERROR)
 
-project(laptop_control VERSION 0.0.0 LANGUAGES CXX)
-
-# setup C++17 required compiler
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED on)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-# programms
-add_subdirectory(laptop_control)
-add_subdirectory(software_updater)
-
-#libs
-add_subdirectory(libs)
-
-#modules
-add_subdirectory(modules)
+# modules
+add_subdirectory(cpu_thermal)
