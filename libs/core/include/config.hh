@@ -24,28 +24,51 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 namespace core {
     namespace fs = std::filesystem;
 
-    class Config {
+    class Storage {
     public:
-        Config() = default;
-        Config(const Config &) = default;
-        Config(Config &&) = default;
-        ~Config() {
+        Storage() = default;
+        Storage(const Storage &) = default;
+        Storage(Storage &&) = default;
+        ~Storage() {
             store();
         }
 
-        explicit Config(std::string name) : name_{std::move(name)} {}
+        explicit Storage(const fs::path &basePath);
+        Storage(const fs::path &basePath, const std::string &name);
 
-        void process();
-
-        auto & conf() const {
+        auto & conf() {
             return conf_;
         }
     private:
         void store();
 
+        const fs::path storage_;
+        YAML::Node conf_;
+    };
+
+    class Config {
+    public:
+        Config() = default;
+        Config(const Config &) = default;
+        Config(Config &&) = default;
+        ~Config() = default;
+
+        explicit Config(std::string name) : name_{std::move(name)}, storage_{configPath()} {}
+
+        auto & conf() {
+            return storage_.conf();
+        }
+
+        std::shared_ptr<Storage> conf(const std::string &name) {
+            return std::make_shared<Storage>(configPath(), name);
+        }
+
+        void process();
+    private:
         fs::path configPath();
 
-        const std::string name_;
-        YAML::Node conf_;
+        std::string name_;
+
+        Storage storage_;
     };
 } // namespace core

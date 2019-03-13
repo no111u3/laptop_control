@@ -25,13 +25,14 @@ namespace core {
 
     const inline auto configDirectory{".config"};
 
-    void Config::process() {
-        auto &env = Env::get();
+    Storage::Storage(const std::filesystem::path &basePath)
+    : Storage(basePath, Env::get().getValue("config", std::string{})) {}
 
-        auto configName = configPath();
 
-        if (!fs::exists(configName)) {
-            auto directory = configName.parent_path();
+    Storage::Storage(const std::filesystem::path &basePath, const std::string &name)
+    : storage_{basePath / name } {
+        if (!fs::exists(storage_)) {
+            auto directory = storage_.parent_path();
             fmt::print("create new config in: {}\n", directory.string());
             if (!fs::exists(directory) && !fs::create_directories(directory)) {
                 fmt::print("failed to create path: {}\n", directory.string());
@@ -41,21 +42,24 @@ namespace core {
             }
         }
         else {
-            conf_ = YAML::LoadFile(configName.string());
+            conf_ = YAML::LoadFile(storage_.string());
         }
     }
 
-    void Config::store() {
-        std::ofstream fout(configPath().string());
+    void Storage::store() {
+        std::ofstream fout(storage_.string());
         fout << conf_;
     }
+
+    void Config::process() {
+    }
+
 
     fs::path Config::configPath() {
         auto &env = Env::get();
 
         return fs::path(env.getEnvVariable("HOME")) /
                configDirectory /
-               name_ /
-               env.getValue("config", std::string{});
+               name_;
     }
 } // namespace core
