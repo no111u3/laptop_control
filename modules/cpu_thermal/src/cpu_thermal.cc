@@ -19,4 +19,8 @@ namespace cpu_thermal {
     void Module::init() {
 
     }
+
+    std::shared_ptr<core::module::IEntity> Module::getEntity(const std::string &name) {
+        return std::shared_ptr<core::module::IEntity>();
+    }
 } // namespace cpu_thermal

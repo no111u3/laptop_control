@@ -26,6 +26,9 @@ namespace cpu_thermal {
         ~Module() override = default;
 
         void init() override;
+
+    private:
+        std::shared_ptr<core::module::IEntity> getEntity(const std::string &name) override;
     };
 
     class Holder : public core::module::IHolder {

@@ -27,27 +27,24 @@ namespace core {
         class IModule {
         public:
             explicit IModule(std::string moduleName) : moduleName_{std::move(moduleName)} {}
-
             virtual ~IModule() = default;
 
             virtual void init() = 0;
 
-            std::shared_ptr<IEntity> entity(const std::string &name) {
-                return entities_.at(name);
-            }
-
-            std::shared_ptr<IEntity> addEntity(const std::string &name, const std::shared_ptr<IEntity> &entity) {
-                return entities_[name] = entity;
+            template <typename T>
+            std::shared_ptr<T> entity(const std::string &name) {
+                return getEntity(name);
             }
 
             const std::string name() const {
                 return moduleName_;
             }
+        protected:
+            virtual std::shared_ptr<IEntity> getEntity(const std::string &name) = 0;
 
 
         private:
             const std::string moduleName_;
-            std::map<std::string, std::shared_ptr<IEntity>> entities_;
         };
     } // namespace module
 } // namespace core
