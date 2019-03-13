@@ -31,12 +31,5 @@ namespace cpu_thermal {
         std::shared_ptr<core::module::IEntity> getEntity(const std::string &name) override;
     };
 
-    class Holder : public core::module::IHolder {
-    public:
-        Holder() : IHolder() {}
-
-        std::shared_ptr<core::module::IModule> module() override {
-            return std::make_shared<Module>();
-        }
-    };
+    using Holder = core::module::THolder<Module>;
 } // namespace cpu_thermal

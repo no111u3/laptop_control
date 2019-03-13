@@ -30,6 +30,16 @@ namespace core {
             virtual std::shared_ptr<IModule> module() = 0;
         };
 
+        template <typename _Module>
+        class THolder : public IHolder {
+        public:
+            THolder() : IHolder() {}
+
+            std::shared_ptr<IModule> module() override {
+                return std::make_shared<_Module>();
+            }
+        };
+
         class Holder {
         public:
             Holder() = default;
