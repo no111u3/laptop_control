@@ -26,6 +26,9 @@ namespace core {
 
             virtual ~IEntity() = default;
 
+            const std::string name() const {
+                return name_;
+            }
         private:
             const std::string name_;
         };
