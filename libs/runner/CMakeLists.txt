@@ -12,8 +12,21 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 
-cmake_minimum_required(VERSION 3.9.6 FATAL_ERROR)
+set(RUNNER_SOURCES
+        src/runner.cc
+        )
 
-# libraries
-add_subdirectory(core)
-add_subdirectory(runner)
+add_library(runner ${RUNNER_SOURCES})
+
+set(Boost_USE_STATIC_LIBS        ON)
+set(Boost_USE_MULTITHREADED      ON)
+set(Boost_USE_STATIC_RUNTIME    OFF)
+
+find_package(Boost 1.65 COMPONENTS system)
+
+target_link_libraries(runner
+        core
+        ${Boost_LIBRARIES}
+        )
+
+target_include_directories(runner PUBLIC include)
