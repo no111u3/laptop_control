@@ -19,6 +19,8 @@ set(CPU_THERM_SOURCES
 add_library(cpu_thermal ${CPU_THERM_SOURCES})
 
 target_link_libraries(cpu_thermal
-        core)
+        core
+        runner
+        )
 
 target_include_directories(cpu_thermal PUBLIC include)
