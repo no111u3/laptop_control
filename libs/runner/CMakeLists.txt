@@ -28,6 +28,7 @@ find_package(Boost 1.65 COMPONENTS system)
 target_link_libraries(runner
         core
         ${Boost_LIBRARIES}
+        pthread
         )
 
 target_include_directories(runner PUBLIC include)
