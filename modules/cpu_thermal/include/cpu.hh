@@ -15,21 +15,25 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include <module/holder.hh>
+#include "core.hh"
+#include "cpu_package.hh"
 
-#include <fmt/format.h>
+#include <module/entity.hh>
+
+#include <map>
 
 namespace cpu_thermal {
-    class Module : public core::module::IModule {
+    class Cpu : public core::module::IEntity {
     public:
-        Module() : IModule("CpuThermal") {}
-        ~Module() override = default;
+        Cpu() : IEntity("Cpu") {}
+        ~Cpu() override = default;
 
-        void init() override;
+        CpuPackage package();
 
-    private:
-        std::shared_ptr<core::module::IEntity> getEntity(const std::string &name) override;
+        int coreNumber();
+
+        Core core(int coreId);
+
+        std::map<int, Core> cores();
     };
-
-    using Holder = core::module::THolder<Module>;
 } // namespace cpu_thermal
