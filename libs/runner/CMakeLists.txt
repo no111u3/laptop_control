@@ -14,7 +14,7 @@
 
 set(RUNNER_SOURCES
         src/runner.cc
-        src/singlerunner.cc
+        src/single_runner.cc
         )
 
 add_library(runner ${RUNNER_SOURCES})

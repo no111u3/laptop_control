@@ -15,6 +15,8 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
+#include "inwriter.hh"
+
 #include <boost/process/child.hpp>
 #include <boost/process/pipe.hpp>
 #include <boost/asio/io_service.hpp>
@@ -50,14 +52,14 @@ namespace runner {
             return error_.get();
         }
 
-        void setInput(const std::string &input) {
-            input_ = input;
+        InWriter pin() {
+            return InWriter{pin_};
         }
     private:
         std::string program_;
         bp::child child_;
         std::error_code ec_;
-        std::string input_;
+        bp::opstream pin_;
         ExType output_;
         ExType error_;
         boost::asio::io_service ios_;

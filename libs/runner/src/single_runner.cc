@@ -14,26 +14,26 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
    limitations under the License.
 */
 
-#include "singlerunner.hh"
+#include "single_runner.hh"
 
 #include <boost/process.hpp>
 
+#include <fmt/format.h>
 
 namespace runner {
     bool SingleRunner::asyncRun() {
-
         child_ = std::move(bp::child(program_,
                 bp::std_out > output_,
                 bp::std_err > error_,
-                bp::std_in < input_, ec_, ios_));
+                bp::std_in < pin_, ec_, ios_));
+
+        ios_.run();
 
         return child_;
     }
 
     bool SingleRunner::run() {
         asyncRun();
-
-        ios_.run();
 
         child_.wait();
 
