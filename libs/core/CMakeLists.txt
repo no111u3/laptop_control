@@ -12,6 +12,11 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 
+# setup C++17 required compiler
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED on)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 set(CORE_SOURCES
         src/config.cc
         src/core.cc
