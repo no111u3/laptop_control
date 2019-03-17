@@ -18,6 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED on)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CORE_SOURCES
+        src/reader/json.cc
         src/config.cc
         src/core.cc
         src/environment.cc
@@ -28,11 +29,13 @@ add_library(core ${CORE_SOURCES})
 
 find_package(fmt)
 find_package(yaml-cpp)
+find_package(jsoncpp)
 
 target_link_libraries(core
         fmt::fmt
         yaml-cpp
         stdc++fs
+        jsoncpp
         )
 
 target_include_directories(core PUBLIC include)
