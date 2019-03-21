@@ -25,6 +25,8 @@ namespace cpu_thermal {
         Module() : IModule("CpuThermal") {}
         ~Module() override = default;
 
+        std::set<std::string> depends() override;
+
         void init() override;
 
     private:

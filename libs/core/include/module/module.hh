@@ -19,6 +19,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <utility>
 
@@ -30,6 +31,8 @@ namespace core {
             virtual ~IModule() = default;
 
             virtual void init() = 0;
+
+            virtual std::set<std::string> depends() = 0;
 
             template <typename T>
             std::shared_ptr<T> entity(const std::string &name) {
