@@ -23,17 +23,17 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <map>
 
 namespace cpu_thermal {
-    class Cpu : public core::module::IEntity {
+    class ICpu : public core::module::IEntity {
     public:
-        Cpu() : IEntity("cpu_thermal", "Cpu") {}
-        ~Cpu() override = default;
+        ICpu() : IEntity("cpu_thermal", "Cpu") {}
+        virtual ~ICpu() override = default;
 
-        CpuPackage package();
+        virtual ICpuPackage package() = 0;
 
-        int coreNumber();
+        virtual int coreNumber() = 0;
 
-        Core core(int coreId);
+        virtual ICore core(int coreId) = 0;
 
-        std::map<int, Core> cores();
+        virtual std::map<int, Core> cores() = 0;
     };
 } // namespace cpu_thermal

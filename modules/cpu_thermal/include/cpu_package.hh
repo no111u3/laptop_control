@@ -18,15 +18,15 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <module/entity.hh>
 
 namespace cpu_thermal {
-    class CpuPackage : public core::module::IEntity {
+    class ICpuPackage : public core::module::IEntity {
     public:
-        CpuPackage() : IEntity("cpu_thermal", "CpuPackage") {}
-        ~CpuPackage() override = default;
+        ICpuPackage() : IEntity("cpu_thermal", "CpuPackage") {}
+        virtual ~ICpuPackage() override = default;
 
-        double temp();
+        virtual double temp() = 0;
 
-        double tempMax();
+        virtual double tempMax() = 0;
 
-        double tempCritical();
+        virtual double tempCritical() = 0;
     };
 } // namespace cpu_thermal

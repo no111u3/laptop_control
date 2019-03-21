@@ -20,15 +20,15 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <fmt/format.h>
 
 namespace cpu_thermal {
-    class Core : public core::module::IEntity {
+    class ICore : public core::module::IEntity {
     public:
-        Core(int coreId) : IEntity("cpu_thermal", fmt::format("Core{}", coreId)) {}
-        ~Core() override = default;
+        ICore(int coreId) : IEntity("cpu_thermal", fmt::format("Core{}", coreId)) {}
+        virtual ~ICore() override = default;
 
-        double temp();
+        virtual double temp() = 0;
 
-        double tempMax();
+        virtual double tempMax() = 0;
 
-        double tempCritical();
+        virtual double tempCritical() = 0;
     };
 } // namespace cpu_thermal
