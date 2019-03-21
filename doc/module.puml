@@ -8,7 +8,7 @@ class IModule {
     {abstract} + void init()
 
     + std::string name()
-    {abstract} + std::vector<std::string> depends()
+    {abstract} + std::set<std::string> depends()
     
     .. Entity factory public interface ..
     + std::shared_ptr<T> entity(const std::string &name)
@@ -25,7 +25,7 @@ class Module {
     + ~Module()
     
 
-    - std::vector<std::string> depends()
+    - std::set<std::string> depends()
     .. Entity factory implementation ..
     - std::shared_ptr<IEntity> getEntity(const std::string &name)
     
