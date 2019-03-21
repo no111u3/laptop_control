@@ -20,7 +20,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 namespace cpu_thermal {
     class CpuPackage : public core::module::IEntity {
     public:
-        CpuPackage() : IEntity("CpuPackage") {}
+        CpuPackage() : IEntity("cpu_thermal", "CpuPackage") {}
         ~CpuPackage() override = default;
 
         double temp();

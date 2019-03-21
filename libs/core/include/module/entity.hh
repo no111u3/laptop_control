@@ -22,14 +22,21 @@ namespace core {
     namespace module {
         class IEntity {
         public:
-            explicit IEntity(std::string name) : name_{std::move(name)} {}
+            explicit IEntity(std::string moduleName, std::string name) :
+                moduleName_{std::move(moduleName)},
+                name_{std::move(name)} {}
 
             virtual ~IEntity() = default;
+
+            const std::string moduleName() const {
+                return moduleName_;
+            }
 
             const std::string name() const {
                 return name_;
             }
         private:
+            const std::string moduleName_;
             const std::string name_;
         };
     } // namespace module

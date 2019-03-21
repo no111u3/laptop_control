@@ -25,7 +25,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 namespace cpu_thermal {
     class Cpu : public core::module::IEntity {
     public:
-        Cpu() : IEntity("Cpu") {}
+        Cpu() : IEntity("cpu_thermal", "Cpu") {}
         ~Cpu() override = default;
 
         CpuPackage package();

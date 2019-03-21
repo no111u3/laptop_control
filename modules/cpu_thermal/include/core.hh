@@ -22,7 +22,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 namespace cpu_thermal {
     class Core : public core::module::IEntity {
     public:
-        Core(int coreId) : IEntity(fmt::format("Core{}", coreId)) {}
+        Core(int coreId) : IEntity("cpu_thermal", fmt::format("Core{}", coreId)) {}
         ~Core() override = default;
 
         double temp();
