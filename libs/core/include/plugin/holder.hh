@@ -69,5 +69,5 @@ namespace core {
 
             std::map<std::string, std::shared_ptr<IModule>> modules_;
         };
-    } // namespace module
+    } // namespace plugin
 } // namespace core

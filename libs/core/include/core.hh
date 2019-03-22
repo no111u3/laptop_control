@@ -15,7 +15,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include "module/holder.hh"
+#include "plugin/holder.hh"
 #include "config.hh"
 #include "environment.hh"
 #include "singleton.hh"

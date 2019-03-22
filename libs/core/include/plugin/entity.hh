@@ -39,5 +39,5 @@ namespace core {
             const std::string moduleName_;
             const std::string name_;
         };
-    } // namespace module
+    } // namespace plugin
 } // namespace core

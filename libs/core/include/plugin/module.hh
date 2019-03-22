@@ -49,5 +49,5 @@ namespace core {
         private:
             const std::string moduleName_;
         };
-    } // namespace module
+    } // namespace plugin
 } // namespace core
