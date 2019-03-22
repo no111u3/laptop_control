@@ -23,7 +23,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <map>
 
 namespace cpu_thermal {
-    class ICpu : public core::module::IEntity {
+    class ICpu : public core::plugin::IEntity, public core::plugin::EntityMarker<ICpu, Plugin> {
     public:
         ICpu() : IEntity() {}
         virtual ~ICpu() override = default;

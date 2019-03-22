@@ -18,7 +18,7 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <plugin/entity.hh>
 
 namespace cpu_thermal {
-    class ICpuPackage : public core::module::IEntity {
+    class ICpuPackage : public core::plugin::IEntity, public core::plugin::EntityMarker<ICpuPackage, Plugin>  {
     public:
         ICpuPackage() : IEntity() {}
         virtual ~ICpuPackage() override = default;

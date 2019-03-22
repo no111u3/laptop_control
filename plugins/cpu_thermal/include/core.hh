@@ -15,12 +15,14 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
+#include "cpu_thermal.hh"
+
 #include <plugin/entity.hh>
 
 #include <fmt/format.h>
 
 namespace cpu_thermal {
-    class ICore : public core::module::IEntity {
+    class ICore : public core::plugin::IEntity, public core::plugin::EntityMarker<ICore, Plugin> {
     public:
         ICore(int coreId) : IEntity() {}
         virtual ~ICore() override = default;
