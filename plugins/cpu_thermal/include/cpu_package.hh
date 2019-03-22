@@ -15,23 +15,18 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include <plugin/holder.hh>
-
-#include <fmt/format.h>
+#include <plugin/entity.hh>
 
 namespace cpu_thermal {
-    class Module : public core::module::IModule {
+    class ICpuPackage : public core::module::IEntity {
     public:
-        Module() : IModule("CpuThermal") {}
-        ~Module() override = default;
+        ICpuPackage() : IEntity() {}
+        virtual ~ICpuPackage() override = default;
 
-        std::set<std::string> depends() override;
+        virtual double temp() = 0;
 
-        void init() override;
+        virtual double tempMax() = 0;
 
-    private:
-        std::shared_ptr<core::module::IEntity> getEntity(const std::string &name) override;
+        virtual double tempCritical() = 0;
     };
-
-    using Holder = core::module::THolder<Module>;
 } // namespace cpu_thermal

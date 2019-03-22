@@ -1,9 +1,9 @@
 @startuml
-IModule <|-- Module
+IPlugin <|-- Module
 
-class IModule {
-    + IModule(std::string moduleName)
-    {abstract} + ~IModule()
+class IPlugin {
+    + IPlugin(std::string moduleName)
+    {abstract} + ~IPlugin()
     
     {abstract} + void init()
 

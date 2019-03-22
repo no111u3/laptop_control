@@ -28,5 +28,5 @@ add_subdirectory(software_updater)
 #libs
 add_subdirectory(libs)
 
-#modules
-add_subdirectory(modules)
+#plugins
+add_subdirectory(plugins)

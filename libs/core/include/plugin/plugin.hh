@@ -21,33 +21,32 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <memory>
 #include <set>
 #include <string>
+#include <typeindex>
 #include <utility>
 
 namespace core {
-    namespace module {
-        class IModule {
+    namespace plugin {
+        template <typename Plugin>
+        class PluginMarker {
         public:
-            explicit IModule(std::string moduleName) : moduleName_{std::move(moduleName)} {}
-            virtual ~IModule() = default;
+            using plugin = Plugin;
+        };
+
+        class IPlugin {
+        public:
+            virtual ~IPlugin() = default;
 
             virtual void init() = 0;
 
-            virtual std::set<std::string> depends() = 0;
+            virtual std::set<std::type_index> depends() = 0;
 
             template <typename T>
-            std::shared_ptr<T> entity(const std::string &name) {
-                return getEntity(name);
+            std::shared_ptr<T> entity(const std::type_info &type) {
+                return getEntity(type);
             }
 
-            const std::string name() const {
-                return moduleName_;
-            }
         protected:
-            virtual std::shared_ptr<IEntity> getEntity(const std::string &name) = 0;
-
-
-        private:
-            const std::string moduleName_;
+            virtual std::shared_ptr<IEntity> getEntity(const std::type_info &type) = 0;
         };
     } // namespace plugin
 } // namespace core

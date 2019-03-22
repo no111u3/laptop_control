@@ -15,13 +15,15 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include <module/entity.hh>
+#include <plugin/entity.hh>
+
+#include <fmt/format.h>
 
 namespace cpu_thermal {
-    class ICpuPackage : public core::module::IEntity {
+    class ICore : public core::module::IEntity {
     public:
-        ICpuPackage() : IEntity("cpu_thermal", "CpuPackage") {}
-        virtual ~ICpuPackage() override = default;
+        ICore(int coreId) : IEntity() {}
+        virtual ~ICore() override = default;
 
         virtual double temp() = 0;
 

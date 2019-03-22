@@ -16,15 +16,15 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include "cpu_thermal.hh"
 
 namespace cpu_thermal {
-    void Module::init() {
+    void Plugin::init() {
 
     }
 
-    std::shared_ptr<core::module::IEntity> Module::getEntity(const std::string &name) {
-        return std::shared_ptr<core::module::IEntity>();
+    std::shared_ptr<core::plugin::IEntity> Plugin::getEntity(const std::type_info &type) {
+        return std::shared_ptr<core::plugin::IEntity>();
     }
 
-    std::set<std::string> Module::depends() {
+    std::set<std::type_index> Plugin::depends() {
         return {};
     }
 } // namespace cpu_thermal

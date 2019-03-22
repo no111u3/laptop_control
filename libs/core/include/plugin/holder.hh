@@ -15,28 +15,33 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include "module.hh"
+#include "plugin.hh"
 
 #include <map>
 #include <string>
 
 namespace core {
-    namespace module {
+    namespace plugin {
+        template <typename Plugin>
+        struct HolderMarker {
+            using plugin = typename Plugin::plugin;
+        };
+
         class IHolder {
         public:
             IHolder() = default;
             virtual ~IHolder() = default;
 
-            virtual std::shared_ptr<IModule> module() = 0;
+            virtual std::shared_ptr<IPlugin> module() = 0;
         };
 
-        template <typename _Module>
-        class THolder : public IHolder {
+        template <typename _Plugin>
+        class THolder : public IHolder, public HolderMarker<_Plugin> {
         public:
             THolder() : IHolder() {}
 
-            std::shared_ptr<IModule> module() override {
-                return std::make_shared<_Module>();
+            std::shared_ptr<IPlugin> module() override {
+                return std::make_shared<_Plugin>();
             }
         };
 
@@ -49,8 +54,8 @@ namespace core {
                 (modules_.emplace(create<Holders>()), ...);
             }
 
-            std::shared_ptr<IModule> module(const std::string &name) {
-                return modules_.at(name);
+            std::shared_ptr<IPlugin> module(const std::type_info &type) {
+                return modules_.at(type);
             }
 
             void process() {
@@ -61,13 +66,13 @@ namespace core {
 
         private:
             template <typename Holder>
-            std::pair<std::string, std::shared_ptr<IModule>> create() {
+            std::pair<std::type_index, std::shared_ptr<IPlugin>> create() {
                 auto holder = Holder{};
 
-                return {holder.module()->name(), holder.module()};
+                return {typeid(typename Holder::plugin), holder.module()};
             }
 
-            std::map<std::string, std::shared_ptr<IModule>> modules_;
+            std::map<std::type_index, std::shared_ptr<IPlugin>> modules_;
         };
     } // namespace plugin
 } // namespace core

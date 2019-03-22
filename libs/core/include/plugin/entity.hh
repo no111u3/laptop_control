@@ -19,25 +19,16 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 #include <utility>
 
 namespace core {
-    namespace module {
+    namespace plugin {
+        template <typename Entity, typename Plugin>
+        struct EntityMarker {
+            using entity = Entity;
+            using plugin = typename Plugin::plugin;
+        };
+        
         class IEntity {
         public:
-            explicit IEntity(std::string moduleName, std::string name) :
-                moduleName_{std::move(moduleName)},
-                name_{std::move(name)} {}
-
             virtual ~IEntity() = default;
-
-            const std::string moduleName() const {
-                return moduleName_;
-            }
-
-            const std::string name() const {
-                return name_;
-            }
-        private:
-            const std::string moduleName_;
-            const std::string name_;
         };
     } // namespace plugin
 } // namespace core

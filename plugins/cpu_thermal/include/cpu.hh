@@ -15,20 +15,25 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include <module/entity.hh>
+#include "core.hh"
+#include "cpu_package.hh"
 
-#include <fmt/format.h>
+#include <plugin/entity.hh>
+
+#include <map>
 
 namespace cpu_thermal {
-    class ICore : public core::module::IEntity {
+    class ICpu : public core::module::IEntity {
     public:
-        ICore(int coreId) : IEntity("cpu_thermal", fmt::format("Core{}", coreId)) {}
-        virtual ~ICore() override = default;
+        ICpu() : IEntity() {}
+        virtual ~ICpu() override = default;
 
-        virtual double temp() = 0;
+        virtual ICpuPackage package() = 0;
 
-        virtual double tempMax() = 0;
+        virtual int coreNumber() = 0;
 
-        virtual double tempCritical() = 0;
+        virtual ICore core(int coreId) = 0;
+
+        virtual std::map<int, Core> cores() = 0;
     };
 } // namespace cpu_thermal

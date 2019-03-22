@@ -15,25 +15,23 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 */
 #pragma once
 
-#include "core.hh"
-#include "cpu_package.hh"
+#include <plugin/holder.hh>
+#include <plugin/plugin.hh>
 
-#include <module/entity.hh>
-
-#include <map>
+#include <fmt/format.h>
 
 namespace cpu_thermal {
-    class ICpu : public core::module::IEntity {
+    class Plugin : public core::plugin::IPlugin, public core::plugin::PluginMarker<Plugin> {
     public:
-        ICpu() : IEntity("cpu_thermal", "Cpu") {}
-        virtual ~ICpu() override = default;
+        ~Plugin() override = default;
 
-        virtual ICpuPackage package() = 0;
+        std::set<std::type_index> depends() override;
 
-        virtual int coreNumber() = 0;
+        void init() override;
 
-        virtual ICore core(int coreId) = 0;
-
-        virtual std::map<int, Core> cores() = 0;
+    private:
+        std::shared_ptr<core::plugin::IEntity> getEntity(const std::type_info &type) override;
     };
+
+    using Holder = core::plugin::THolder<Plugin>;
 } // namespace cpu_thermal

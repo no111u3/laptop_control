@@ -14,5 +14,5 @@
 
 cmake_minimum_required(VERSION 3.9.6 FATAL_ERROR)
 
-# modules
+# plugins
 add_subdirectory(cpu_thermal)
