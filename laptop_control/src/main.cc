@@ -28,7 +28,7 @@ auto main(int argc, char **argv, char **env) -> int {
     core::Env::get().process();
     core::Conf::create("laptop_control");
     core::Conf::get().process();
-    core::Mod::create();
-    core::Mod::get().construct<cpu_thermal::Holder>();
-    core::Mod::get().process();
+    core::Plug::create();
+    core::Plug::get().construct<cpu_thermal::Holder>();
+    core::Plug::get().process();
 }

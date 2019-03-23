@@ -32,7 +32,7 @@ namespace core {
             IHolder() = default;
             virtual ~IHolder() = default;
 
-            virtual std::shared_ptr<IPlugin> module() = 0;
+            virtual std::shared_ptr<IPlugin> plugin() = 0;
         };
 
         template <typename _Plugin>
@@ -40,7 +40,7 @@ namespace core {
         public:
             THolder() : IHolder() {}
 
-            std::shared_ptr<IPlugin> module() override {
+            std::shared_ptr<IPlugin> plugin() override {
                 return std::make_shared<_Plugin>();
             }
         };
@@ -51,16 +51,16 @@ namespace core {
 
             template <typename ...Holders>
             void construct() {
-                (modules_.emplace(create<Holders>()), ...);
+                (plugins_.emplace(create<Holders>()), ...);
             }
 
-            std::shared_ptr<IPlugin> module(const std::type_info &type) {
-                return modules_.at(type);
+            std::shared_ptr<IPlugin> plugin(const std::type_info &type) {
+                return plugins_.at(type);
             }
 
             void process() {
-                for (const auto &module : modules_) {
-                    module.second->init();
+                for (const auto &plugin : plugins_) {
+                    plugin.second->init();
                 }
             }
 
@@ -69,10 +69,10 @@ namespace core {
             std::pair<std::type_index, std::shared_ptr<IPlugin>> create() {
                 auto holder = Holder{};
 
-                return {typeid(typename Holder::plugin), holder.module()};
+                return {typeid(typename Holder::plugin), holder.plugin()};
             }
 
-            std::map<std::type_index, std::shared_ptr<IPlugin>> modules_;
+            std::map<std::type_index, std::shared_ptr<IPlugin>> plugins_;
         };
     } // namespace plugin
 } // namespace core

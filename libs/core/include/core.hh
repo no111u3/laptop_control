@@ -25,5 +25,5 @@ Copyright 2019 Boris Vinogradov <no111u3@gmail.com>
 namespace core {
     using Env = Singleton<Environment>;
     using Conf = Singleton<Config>;
-    using Mod = Singleton<plugin::Holder>;
+    using Plug = Singleton<plugin::Holder>;
 } // namespace core
