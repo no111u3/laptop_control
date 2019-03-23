@@ -29,6 +29,8 @@ namespace cpu_thermal {
 
         void init() override;
 
+        bool thermalIsAvailable();
+
     private:
         std::shared_ptr<core::plugin::IEntity> getEntity(const std::type_info &type) override;
     };

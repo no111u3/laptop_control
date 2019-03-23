@@ -27,4 +27,8 @@ namespace cpu_thermal {
     std::set<std::type_index> Plugin::depends() {
         return {};
     }
+
+    bool Plugin::thermalIsAvailable() {
+        return false;
+    }
 } // namespace cpu_thermal
