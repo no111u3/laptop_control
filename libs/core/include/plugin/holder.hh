@@ -54,8 +54,15 @@ namespace core {
                 (plugins_.emplace(create<Holders>()), ...);
             }
 
-            std::shared_ptr<IPlugin> plugin(const std::type_info &type) {
-                return plugins_.at(type);
+
+            template <typename Entity>
+            std::shared_ptr<Entity> entity() {
+                return plugin<Entity::plugin>()->template entity<Entity>();
+            }
+
+            template <typename Plugin>
+            std::shared_ptr<Plugin> plugin() {
+                return std::dynamic_pointer_cast<Plugin>(plugins_.at(typeid(typename Plugin::plugin)));
             }
 
             void process() {

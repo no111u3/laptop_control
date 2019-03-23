@@ -41,8 +41,8 @@ namespace core {
             virtual std::set<std::type_index> depends() = 0;
 
             template <typename Entity>
-            std::shared_ptr<Entity> entity(const std::type_info &type) {
-                return std::dynamic_pointer_cast<Entity>(getEntity(type));
+            std::shared_ptr<Entity> entity() {
+                return std::dynamic_pointer_cast<Entity>(getEntity(typeid(Entity::entity)));
             }
 
         protected:
