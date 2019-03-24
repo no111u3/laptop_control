@@ -24,7 +24,8 @@ namespace {
 auto main(int argc, char **argv, char **env) -> int {
     core::Env::create(argc, argv, env);
     core::Env::get().setProgrammInto("simple program to update software for Gentoo based linux");
-    core::Env::get().process();
-    core::Conf::create("software_updater");
-    core::Conf::get().process();
+    if (auto isHelpMode = core::Env::get().process(); !isHelpMode) {
+        core::Conf::create("software_updater");
+        core::Conf::get().process();
+    }
 }

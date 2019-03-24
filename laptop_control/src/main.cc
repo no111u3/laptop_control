@@ -25,10 +25,15 @@ namespace {
 auto main(int argc, char **argv, char **env) -> int {
     core::Env::create(argc, argv, env);
     core::Env::get().setProgrammInto("simple program to control laptop power management and other");
-    core::Env::get().process();
-    core::Conf::create("laptop_control");
-    core::Conf::get().process();
-    core::Plug::create();
-    core::Plug::get().construct<cpu_thermal::Holder>();
-    core::Plug::get().process();
+    if (auto isHelpMode = core::Env::get().process(); !isHelpMode) {
+        core::Conf::create("laptop_control");
+        core::Conf::get().process();
+        core::Plug::create();
+        core::Plug::get().construct<cpu_thermal::Holder>();
+        core::Plug::get().process();
+
+        auto therm = core::Plug::get().plugin<cpu_thermal::Plugin>();
+
+        fmt::print("thermal is available: {}\n", therm->thermalIsAvailable());
+    }
 }
