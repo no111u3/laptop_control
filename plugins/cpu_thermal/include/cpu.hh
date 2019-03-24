@@ -32,8 +32,8 @@ namespace cpu_thermal {
 
         virtual int coreNumber() = 0;
 
-        virtual ICore core(int coreId) = 0;
+        virtual std::shared_ptr<ICore> core(int coreId) = 0;
 
-        virtual std::map<int, Core> cores() = 0;
+        virtual std::map<int, std::shared_ptr<ICore>> cores() = 0;
     };
 } // namespace cpu_thermal
